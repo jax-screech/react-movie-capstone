@@ -6,7 +6,7 @@ const Searchbar = () => {
     <input 
         type="text" 
         placeholder="Search for movies..." 
-        style={{ padding: '6px',backgroundColor: 'whitesmoke', width: '200px', borderRadius: '5px', border: '1px solid #ccc'}} 
+        style={{ padding: '6px',backgroundColor: 'whitesmoke', width: '300px', borderRadius: '5px', border: '1px solid #ccc'}} 
         onChange={(e) => console.log(e.target.value)} 
     />
     </div>
