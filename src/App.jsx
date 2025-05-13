@@ -6,11 +6,13 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import HomePage from "./pages/Home.jsx";
 import Genres from "./pages/Genres.jsx";
+import Account from "./pages/Account.jsx";
 
 const App = () => {
   return (
     <Router>
       <Navbar />
+      <Account />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />

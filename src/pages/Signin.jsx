@@ -23,6 +23,10 @@ const Signin = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
       <div className="bg-gray-800 p-8 rounded-xl shadow-md w-full max-w-md">
+          <button
+            onClick={() => navigate(-1)}
+            className="mb-4 text-blue-400 hover:underline"
+          >Back</button>
         <h2 className="text-2xl font-bold mb-6 text-center">Log in to NexTech</h2>
         {error && <p className="text-red-400 mb-4">{error}</p>}
         <form onSubmit={handleLogin} className="space-y-4">
