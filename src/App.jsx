@@ -1,28 +1,30 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./pages/Signin.jsx";
-import Signup from "./pages/Signup.jsx";
-import Navbar from "./components/Navbar.jsx";
-import Footer from "./components/Footer.jsx";
-import HomePage from "./pages/Home.jsx";
-import Genres from "./pages/Genres.jsx";
-import Account from "./pages/Account.jsx";
+import Home from "./pages/Home";
+import Login from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Movies from "./pages/Movies";
+import PrivateRoute from "./components/PrivateRoute";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Navbar />
-      <Account />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/genres" element={<Genres />} />
-
+        {/* Protected Movies page */}
+        <Route path="/movies" element={
+          <PrivateRoute>
+            <Movies />
+          </PrivateRoute>
+        } />
       </Routes>
       <Footer />
     </Router>
   );
-};
+}
 
 export default App;

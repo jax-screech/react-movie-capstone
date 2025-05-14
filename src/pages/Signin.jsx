@@ -1,8 +1,8 @@
-// src/pages/Signin.jsx
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Signin = () => {
   const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ const Signin = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/');
+      navigate('/movies');
     } catch (err) {
       setError(err.message);
     }
@@ -61,7 +61,9 @@ const Signin = () => {
         </form>
         <p className="mt-4 text-sm text-center">
           Don't have an account?{' '}
-          <a href="/signup" className="text-blue-400 hover:underline">Sign up</a>
+          <Link to="/signup" className="text-blue-600 text-lg">
+            Signup
+          </Link>
         </p>
       </div>
     </div>

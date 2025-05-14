@@ -4,6 +4,7 @@ import { auth, db } from '../firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -84,7 +85,9 @@ const Signup = () => {
         </form>
         <p className="mt-4 text-sm text-center">
           Already have an account?{' '}
-          <a href="/login" className="text-blue-400 hover:underline">Log in</a>
+          <Link to="/login" className="text-blue-600 text-lg">
+            Login
+          </Link>
         </p>
       </div>
     </div>
