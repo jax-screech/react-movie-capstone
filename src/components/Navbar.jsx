@@ -1,39 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebaseConfig";
-import Logo from "../assets/logo.jpeg";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleLogout = () => {
-    signOut(auth).then(() => navigate("/login"));
-  };
-
-  const linkClasses = ({ isActive }) =>
-    isActive ? "text-blue-400 font-semibold" : "hover:text-blue-300";
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-800 text-white px-4 py-3 flex flex-wrap items-center justify-between">
-      <div className="flex items-center space-x-2">
-        <img src={Logo} alt="logo" className="rounded-full h-12 w-12" />
-        <p className="text-xl font-bold text-blue-400">NexTech</p>
+    <nav className="bg-gray-800 text-white px-4 py-3 flex justify-between items-center">
+      <h1 className="text-xl font-bold text-blue-400">NexTech</h1>
+
+      {/* Desktop Links */}
+      <div className="space-x-4 hidden md:flex">
+        <Link to="/login" className="hover:text-blue-300">Login</Link>
+        <Link to="/signup" className="hover:text-blue-300">Signup</Link>
       </div>
 
-      <div className="md:hidden">
+      {/* Mobile Hamburger */}
+      <div className="md:hidden relative">
         <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-white focus:outline-none"
+          onClick={() => setMenuOpen(!menuOpen)}
         >
           <svg
             className="w-6 h-6"
@@ -46,43 +31,28 @@ const Navbar = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d={
-                isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
-              }
+              d="M4 6h16M4 12h16m-7 6h7"
             />
           </svg>
         </button>
-      </div>
 
-      <div
-        className={`${
-          isMenuOpen ? "block" : "hidden"
-        } w-full md:flex md:items-center md:space-x-6 mt-2 md:mt-0`}
-      >
-        <NavLink to="/" className={linkClasses}>
-          Home
-        </NavLink>
-        {user && (
-          <NavLink to="/movies" className={linkClasses}>
-            Movies
-          </NavLink>
-        )}
-        {!user ? (
-          <>
-            <NavLink to="/login" className={linkClasses}>
+        {menuOpen && (
+          <div className="absolute right-0 mt-2 bg-gray-800 border border-gray-700 rounded shadow-md z-50">
+            <Link
+              to="/login"
+              className="block px-4 py-2 hover:bg-gray-700"
+              onClick={() => setMenuOpen(false)}
+            >
               Login
-            </NavLink>
-            <NavLink to="/signup" className={linkClasses}>
+            </Link>
+            <Link
+              to="/signup"
+              className="block px-4 py-2 hover:bg-gray-700"
+              onClick={() => setMenuOpen(false)}
+            >
               Signup
-            </NavLink>
-          </>
-        ) : (
-          <button
-            onClick={handleLogout}
-            className="hover:text-red-400 font-semibold"
-          >
-            Logout
-          </button>
+            </Link>
+          </div>
         )}
       </div>
     </nav>
