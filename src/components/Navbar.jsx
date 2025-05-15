@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from '../assets/logo.jpeg'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className="bg-gray-800 text-white px-4 py-3 flex justify-between items-center">
+      <img src={Logo} alt="" className='rounded-full h-12 w-12' />
       <h1 className="text-xl font-bold text-blue-400">NexTech</h1>
 
       {/* Desktop Links */}

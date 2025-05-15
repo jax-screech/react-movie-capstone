@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Logo from '../assets/logo.jpeg'
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -36,10 +37,12 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
       <div className="bg-gray-800 p-8 rounded-xl shadow-md w-full max-w-md">
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-4 text-blue-400 hover:underline"
-        >Back</button>
+        <nav className="bg-gray-800 flex justify-between items-center fixed top-0 w-full p-2 z-50 left-0">
+                  <img src={Logo} alt="" className='rounded-full h-12 w-12'/>
+                  <div>
+                    <Link to="/" className="hover:text-blue-300">Home</Link>
+                  </div>
+        </nav>
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up to NexTech</h2>
         {error && <p className="text-red-400 mb-4 text-sm">{error}</p>}
         <form onSubmit={handleSignup} className="space-y-4">
@@ -61,7 +64,7 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 rounded bg-gray-700 text-white outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
+              placeholder="Name@example.com"
               required
             />
           </div>
@@ -72,7 +75,7 @@ const Signup = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 rounded bg-gray-700 text-white outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your password"
+              placeholder="Set a password"
               required
             />
           </div>
